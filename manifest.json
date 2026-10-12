@@ -1,0 +1,16 @@
+{
+  "name": "أبطال المنطق - المنطق الرياضي للصف العاشر",
+  "short_name": "أبطال المنطق",
+  "description": "لعبة تعليمية تفاعلية في المنطق الرياضي للصف العاشر",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#edf3f8",
+  "theme_color": "#102f59",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
