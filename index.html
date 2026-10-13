@@ -1,88 +1,44 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#102f59">
-<meta name="description" content="لعبة تعليمية تفاعلية في المنطق الرياضي للصف العاشر">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>أبطال المنطق | الصف العاشر</title>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#082f63"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><title>منطق العقل</title>
 <style>
-:root{--navy:#102f59;--blue:#2478d4;--gold:#ffd45c;--ink:#173454;--muted:#657a91;--line:#dbe5ef;--paper:#fff;--bg:#edf3f8;--green:#12865d;--red:#c33b52}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#e8f1fb,#f7f9fc);font-family:Tahoma,Arial,sans-serif;color:var(--ink);min-height:100vh}
-button{font:inherit;cursor:pointer}.app{max-width:620px;margin:auto;min-height:100vh;padding:0 0 24px}
-header{background:var(--navy);color:white;padding:calc(18px + env(safe-area-inset-top)) 20px 20px;border-radius:0 0 26px 26px;box-shadow:0 8px 24px #102f5925}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:#244a77;display:grid;place-items:center;font-size:27px}.brand h1{font-size:20px;margin:0 0 4px}.brand p{font-size:12px;color:#cbdcf0;margin:0}.points{background:#244a77;padding:9px 12px;border-radius:14px;color:var(--gold);font-weight:bold;white-space:nowrap}
-main{padding:18px 16px}.welcome{background:white;border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:16px;box-shadow:0 6px 18px #193e6410}.welcome h2{margin:0 0 8px;font-size:21px}.welcome p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}
-.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}.mode{border:0;border-radius:17px;padding:15px 12px;text-align:right;color:white;min-height:105px;box-shadow:0 5px 12px #16395b15}.mode strong{display:block;font-size:15px;margin-bottom:8px}.mode span{font-size:12px;opacity:.92;line-height:1.5}.mode.purple{background:linear-gradient(135deg,#9270e4,#7046c2)}.mode.blue{background:linear-gradient(135deg,#3297ed,#1768c7)}.mode.green{background:linear-gradient(135deg,#20b887,#0a946a)}.mode.orange{background:linear-gradient(135deg,#ffb04b,#f18120)}
-.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 6px 18px #193e6410}.hidden{display:none!important}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.eyebrow{font-size:12px;color:var(--blue);font-weight:bold}.progress{height:7px;background:#e5edf5;border-radius:20px;overflow:hidden;margin:14px 0 20px}.progress div{height:100%;width:0;background:var(--blue);transition:width .2s}.question{font-size:19px;line-height:1.8;margin:12px 0 18px;font-weight:bold}.answers{display:grid;gap:10px}.answer{border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;text-align:right;color:var(--ink);line-height:1.6}.answer.selected{border-color:var(--blue);background:#eaf3ff;box-shadow:inset 0 0 0 1px var(--blue)}.answer.correct{border-color:#19a777;background:#e5f8f0}.answer.wrong{border-color:#e56b7b;background:#fff0f2}
-.primary,.secondary{border:0;border-radius:14px;padding:14px 18px;font-weight:bold;width:100%;margin-top:14px}.primary{background:var(--blue);color:white;box-shadow:0 5px 12px #2478d425}.primary:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#edf3f9;color:var(--navy)}.feedback{padding:13px;border-radius:14px;margin-top:14px;line-height:1.7;font-size:14px;background:#f1f5f9}.feedback.good{background:#e5f8f0;color:#126c4d}.feedback.bad{background:#fff0f2;color:#a72f44}.result{text-align:center;padding:12px 4px}.medal{font-size:60px}.result h2{font-size:26px;margin:8px 0}.scorebig{font-size:35px;color:var(--blue);font-weight:bold;margin:10px}.small{font-size:12px;color:var(--muted);line-height:1.7}.section-title{font-size:17px;margin:0 0 12px}.install{display:none;background:#fff4cc;color:#6c4c00;border:1px solid #f4d36a;border-radius:15px;padding:12px 14px;margin-bottom:14px;width:100%;font-weight:bold}.foot{text-align:center;color:#8292a4;font-size:11px;padding:12px}
-@media(min-width:560px){.app{padding-top:18px;padding-bottom:30px}header{border-radius:26px}.modes{grid-template-columns:1fr 1fr}.question{font-size:21px}}
-</style>
-</head>
-<body>
-<div class="app">
-<header>
- <div class="top">
-  <div class="brand"><div class="logo">🧠</div><div><h1>أبطال المنطق</h1><p>المنطق الرياضي · الصف العاشر</p></div></div>
-  <div class="points">⭐ <span id="totalPoints">0</span></div>
- </div>
-</header>
-<main>
- <button id="installBtn" class="install">📲 إضافة اللعبة إلى الشاشة الرئيسية</button>
- <section id="home">
-  <div class="welcome"><h2>هل أنتِ مستعدة للتحدّي؟</h2><p>اختبري مهاراتكِ في العبارات المنطقية وأدوات الربط والشرطية. أجيبي عن الأسئلة واجمعي النقاط وتعلّمي من التفسير بعد كل إجابة.</p></div>
-  <div class="modes">
-   <button class="mode purple" data-mode="all"><strong>🎯 تحدّي المفاهيم</strong><span>أسئلة متنوعة في المنطق الرياضي</span></button>
-   <button class="mode blue" data-mode="connectors"><strong>🧩 أدوات الربط</strong><span>الاقتران والفصل والنفي</span></button>
-   <button class="mode green" data-mode="conditional"><strong>💡 العبارات الشرطية</strong><span>تدرّبي على قيمة الصدق</span></button>
-   <button class="mode orange" data-mode="truefalse"><strong>⚡ تحدّي سريع</strong><span>صح أم خطأ؟</span></button>
-  </div>
-  <div class="panel"><div class="row"><h3 class="section-title">🏆 تقدّمكِ</h3><span class="eyebrow">تعلّم باللعب</span></div><p class="small">كل إجابة صحيحة تمنحكِ 10 نقاط. اقرئي تفسير الإجابة حتى تتذكري القاعدة في المرة القادمة.</p><button class="primary" id="startAll">ابدئي اللعبة</button></div>
- </section>
- <section id="game" class="panel hidden">
-  <div class="row"><span class="eyebrow" id="topic">تحدّي المفاهيم</span><span class="small" id="counter">1 / 5</span></div>
-  <div class="progress"><div id="progressBar"></div></div>
-  <div class="question" id="questionText"></div>
-  <div class="answers" id="answers"></div>
-  <div id="feedback" class="feedback hidden" aria-live="polite"></div>
-  <button class="primary" id="checkBtn" disabled>تحقّقي من الإجابة</button>
-  <button class="secondary" id="quitBtn">العودة إلى القائمة</button>
- </section>
- <section id="results" class="panel hidden">
-  <div class="result"><div class="medal" id="resultEmoji">🏆</div><h2 id="resultTitle">أحسنتِ!</h2><p>انتهى التحدّي بنجاح.</p><div class="scorebig" id="finalScore">0 / 50</div><p id="resultMessage"></p><button class="primary" id="replayBtn">العبِي مرة أخرى</button><button class="secondary" id="homeBtn">العودة إلى الرئيسية</button></div>
- </section>
- <div class="foot">نسخة تعليمية تجريبية · راجعي المصطلحات مع كتاب الرياضيات الفلسطيني المعتمد</div>
-</main>
-</div>
+:root{--n:#082f63;--b:#1268d6;--g:#10a66a;--o:#f28b18;--r:#e84155;--ink:#10294b;--line:#d5e6f7}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(145deg,#eaf5ff,#fff 55%,#e4f5ef);color:var(--ink)}button{font:inherit;cursor:pointer;border:0}.top{background:var(--n);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center}.top h1{margin:0}.top small{color:#cfe4ff}.wrap{max-width:1000px;margin:auto;padding:20px 15px}.hero{background:linear-gradient(120deg,#082f63,#1268d6);color:white;padding:28px;border-radius:24px;box-shadow:0 12px 30px #082f6320;display:flex;justify-content:space-between;gap:20px;align-items:center}.hero h2{font-size:clamp(28px,4vw,42px);margin:8px 0}.hero p{line-height:1.8;color:#e3f0ff}.art{font-size:90px}.credit{display:inline-block;background:#ffffff20;padding:9px 12px;border-radius:10px;margin:5px 3px 0 0;font-size:13px}.btn{padding:12px 18px;border-radius:12px;font-weight:bold}.primary{background:var(--b);color:white}.soft{background:#eaf3ff;color:var(--b)}h3{margin:24px 0 12px}.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.mode{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;text-align:right;box-shadow:0 8px 22px #082f6310;min-height:130px;color:var(--ink)}.mode span{font-size:28px;display:block;margin-bottom:8px}.mode b{display:block;margin-bottom:7px}.mode small{color:#63758d;line-height:1.5}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:18px;box-shadow:0 8px 22px #082f6310}.hidden{display:none!important}.head{display:flex;justify-content:space-between;gap:10px}.pill{background:#eaf5ff;color:var(--b);padding:7px 12px;border-radius:99px}.bar{height:8px;background:#e8f0f9;border-radius:99px;margin:16px 0;overflow:hidden}.bar div{height:100%;width:0;background:var(--g)}.topic{color:var(--b);font-size:13px;font-weight:bold}.question{font-size:clamp(20px,3vw,27px);line-height:1.7}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{padding:15px;border:1px solid var(--line);border-radius:13px;background:#f9fcff;text-align:right;color:var(--ink);line-height:1.5}.answer.correct{background:#e1f9ee;border-color:var(--g)}.answer.wrong{background:#fff0f1;border-color:var(--r)}.feedback{padding:13px;border-radius:12px;margin-top:13px;line-height:1.7}.good{background:#e6f8ef;color:#087547}.bad{background:#fff0f1;color:#ad2636}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{text-align:center;padding:15px;background:#f5faff;border-radius:13px}.stat b{display:block;font-size:25px;color:var(--b)}table{border-collapse:collapse;width:100%;margin-top:10px}td,th{border-bottom:1px solid var(--line);padding:12px;text-align:center}th{background:#f0f7ff}footer{text-align:center;color:#63758d;padding:24px;font-size:13px;line-height:1.9}@media(max-width:700px){.modes{grid-template-columns:1fr 1fr}.art{display:none}.hero{padding:22px}.answers{grid-template-columns:1fr}}@media(max-width:390px){.modes{grid-template-columns:1fr}.panel{padding:15px}}
+</style></head><body>
+<header class="top"><div><h1>🧠 منطق العقل</h1><small>لعبة الرياضيات • الصف العاشر</small></div><div>⭐ نقاطك: <b id="total">0</b></div></header>
+<main class="wrap">
+<section class="hero" id="hero"><div><small>تحدَّ عقلك • فكّر • استنتج</small><h2>هل أنت بطل المنطق؟</h2><p>اختبر فهمك للعبارات المنطقية والنفي والروابط المنطقية وجداول الصواب عبر تحديات ممتعة.</p><button class="btn primary" onclick="start('mix')">🚀 ابدأ التحدي</button><div><span class="credit">إعداد الطالب: <b>نسيم رواشده</b></span><span class="credit">إشراف المعلم: <b>عبيدة الخلايلة</b></span><span class="credit">المنهاج الفلسطيني • الصف العاشر</span></div></div><div class="art">💡</div></section>
+<h3 id="chooseTitle">🎮 اختر نمط اللعب</h3><section class="modes" id="modes">
+<button class="mode" onclick="start('concepts')"><span>🧩</span><b>اختبار المفاهيم</b><small>العبارات المنطقية والنفي</small></button>
+<button class="mode" onclick="start('truth')"><span>📊</span><b>جداول الصواب</b><small>الروابط المنطقية وقيم الصواب</small></button>
+<button class="mode" onclick="start('conditional')"><span>🔗</span><b>العبارات الشرطية</b><small>الشرطية والعكس والنقيض</small></button>
+<button class="mode" onclick="start('timed')"><span>⏱️</span><b>تحدي السرعة</b><small>نقاط إضافية لكل إجابة صحيحة</small></button></section>
+<section id="game" class="panel hidden"><div class="head"><div><b id="modeName">اختبار المفاهيم</b><div class="topic" id="topic"></div></div><span class="pill" id="count"></span></div><div class="bar"><div id="progress"></div></div><p class="question" id="question"></p><div class="answers" id="answers"></div><div id="feedback"></div><div class="actions"><button id="next" class="btn primary hidden" onclick="next()">السؤال التالي ←</button><button class="btn soft" onclick="home()">القائمة الرئيسية</button></div></section>
+<section id="result" class="panel hidden"><div style="text-align:center;padding:15px"><div style="font-size:65px" id="trophy">🏆</div><h2 id="resultTitle">بطل المنطق!</h2><p id="resultText"></p><div style="font-size:42px;color:var(--b);font-weight:bold"><span id="score">0</span> / 100</div><div class="stats"><div class="stat"><b id="correct">0</b><span>إجابات صحيحة</span></div><div class="stat"><b id="wrong">0</b><span>تحتاج مراجعة</span></div><div class="stat"><b id="earned">0</b><span>نقاط مكتسبة</span></div></div><div class="actions" style="justify-content:center"><button class="btn primary" onclick="start(mode)">🔁 العب مجددًا</button><button class="btn soft" onclick="home()">🏠 الرئيسية</button></div></div></section>
+<section class="panel"><h3 style="margin-top:0">📌 تذكير سريع</h3><table><tr><th>الرمز</th><th>المعنى</th><th>متى تكون صائبة؟</th></tr><tr><td>¬ p</td><td>نفي p</td><td>عندما تكون p خاطئة</td></tr><tr><td>p ∧ q</td><td>p و q</td><td>عندما تكون العبارتان صائبتين</td></tr><tr><td>p ∨ q</td><td>p أو q</td><td>عندما تكون واحدة على الأقل صائبة</td></tr><tr><td>p → q</td><td>إذا كان p فإن q</td><td>تكون خاطئة فقط إذا كانت p صائبة و q خاطئة</td></tr></table></section></main>
+<footer><b>منطق العقل — مشروع تعليمي</b><br>إعداد الطالب: نسيم رواشده • إشراف المعلم: عبيدة الخلايلة<br>الصف العاشر الأساسي | الرياضيات | المنهاج الفلسطيني<br>تحفظ اللعبة مجموع النقاط على هذا الجهاز فقط.</footer>
 <script>
 const bank=[
- {topic:"نفي العبارة",mode:"all",q:"ما نفي العبارة: «العدد 7 عدد زوجي»؟",a:["العدد 7 عدد فردي","العدد 7 عدد أولي","العدد 7 عدد موجب"],c:0,e:"النفي المنطقي لعبارة «العدد 7 زوجي» هو «العدد 7 ليس زوجيًا»، ويمكن صياغته هنا بأنه عدد فردي."},
- {topic:"الاقتران المنطقي",mode:"connectors",q:"إذا كانت p صادقة و q كاذبة، فما قيمة p ∧ q؟",a:["صادقة","كاذبة","لا يمكن تحديدها"],c:1,e:"الاقتران p ∧ q يكون صادقًا فقط إذا كانت p و q صادقتين معًا."},
- {topic:"الفصل المنطقي",mode:"connectors",q:"متى تكون العبارة p ∨ q كاذبة؟",a:["عندما تكون p صادقة فقط","عندما تكون q صادقة فقط","عندما تكون p و q كاذبتين"],c:2,e:"الفصل p ∨ q يكون كاذبًا فقط عندما تكون العبارتان كاذبتين."},
- {topic:"العبارات الشرطية",mode:"conditional",q:"متى تكون العبارة الشرطية p → q كاذبة؟",a:["p صادقة و q كاذبة","p كاذبة و q صادقة","p و q صادقتان"],c:0,e:"الحالة الوحيدة التي تكون فيها الشرطية كاذبة هي صدق المقدّم p وكذب التالي q."},
- {topic:"قانون دي مورغان",mode:"connectors",q:"أي عبارة تكافئ نفي (p ∧ q)؟",a:["¬p ∧ ¬q","¬p ∨ ¬q","p ∨ q"],c:1,e:"وفق قانون دي مورغان: ¬(p ∧ q) تكافئ ¬p ∨ ¬q."},
- {topic:"قيمة الصدق",mode:"truefalse",q:"العبارة p ∧ q تكون صادقة إذا كانت p صادقة و q كاذبة.",a:["صح","خطأ"],c:1,e:"خطأ؛ الاقتران يحتاج إلى صدق العبارتين معًا."},
- {topic:"قيمة الصدق",mode:"truefalse",q:"إذا كانت p كاذبة، فإن p → q صادقة مهما كانت قيمة q.",a:["صح","خطأ"],c:0,e:"صحيح؛ إذا كان المقدّم كاذبًا فإن العبارة الشرطية تكون صادقة في المنطق القضي."},
- {topic:"النفي",mode:"all",q:"إذا كانت p عبارة صادقة، فما قيمة ¬p؟",a:["صادقة","كاذبة","صادقة وكاذبة معًا"],c:1,e:"النفي يعكس قيمة الصدق: نفي العبارة الصادقة كاذب."},
- {topic:"الفصل المنطقي",mode:"connectors",q:"إذا كانت p صادقة و q كاذبة، فما قيمة p ∨ q؟",a:["صادقة","كاذبة","غير محددة"],c:0,e:"الفصل يكون صادقًا إذا كانت واحدة على الأقل من العبارتين صادقة."},
- {topic:"العبارات الشرطية",mode:"conditional",q:"في العبارة p → q، ماذا نسمي q؟",a:["المقدّم","التالي","نفي العبارة"],c:1,e:"في العبارة الشرطية p → q، تسمى p المقدّم وتسمى q التالي."}
+['concepts','العبارة المنطقية','أيٌّ مما يأتي يُعدّ عبارة منطقية؟',['ما أجمل الرياضيات!','العدد 7 عدد فردي.','افتح الكتاب.','هل العدد 5 زوجي؟'],1,'العبارة المنطقية جملة خبرية يمكن الحكم عليها بالصواب أو الخطأ.'],
+['concepts','قيمة الصواب','ما قيمة الصواب للعبارة: «العدد 12 عدد أولي»؟',['صائبة','خاطئة','صائبة وخاطئة معًا','لا يمكن الحكم'],1,'العدد 12 يقبل القسمة على أعداد غير 1 ونفسه، لذلك ليس أوليًا.'],
+['concepts','النفي','إذا كانت p: «العدد 9 فردي»، فما نفي p؟',['العدد 9 زوجي','العدد 9 فردي أو أولي','العدد 9 ليس فرديًا','العدد 9 أكبر من 5'],2,'نفي العبارة يغيّر قيمة صدقها.'],
+['truth','الرابط «و»','إذا كانت p صائبة و q خاطئة، فما قيمة p ∧ q؟',['صائبة','خاطئة','تعتمد على p فقط','لا يمكن تحديدها'],1,'الرابط «و» صائب فقط عندما تكون العبارتان صائبتين معًا.'],
+['truth','الرابط «أو»','إذا كانت p خاطئة و q صائبة، فما قيمة p ∨ q؟',['صائبة','خاطئة','لا يمكن تحديدها','فقط إذا كانت p صائبة'],0,'الرابط «أو» صائب إذا كانت واحدة على الأقل صائبة.'],
+['truth','النفي','إذا كانت قيمة p خاطئة، فما قيمة ¬p؟',['خاطئة دائمًا','صائبة','لا قيمة لها','صائبة وخاطئة'],1,'النفي يعكس قيمة الصواب.'],
+['conditional','العبارة الشرطية','متى تكون العبارة الشرطية p → q خاطئة؟',['عندما تكون p و q صائبتين','عندما تكون p خاطئة و q صائبة','عندما تكون p صائبة و q خاطئة','عندما تكون p و q خاطئتين'],2,'تكون الشرطية خاطئة فقط عندما يكون الفرض صائبًا والنتيجة خاطئة.'],
+['conditional','العكس','ما عكس العبارة: «إذا كان العدد يقبل القسمة على 4 فإنه زوجي»؟',['إذا كان العدد زوجيًا فإنه يقبل القسمة على 4','إذا لم يكن زوجيًا فلا يقبل القسمة على 4','العدد يقبل القسمة على 4 وهو زوجي','إذا لم يقبل القسمة على 4 فهو ليس زوجيًا'],0,'عكس p → q هو q → p، أي تبديل الفرض والنتيجة.'],
+['truth','تكافؤ منطقي','أيّ عبارة تكافئ نفي «p و q»؟',['¬p ∧ ¬q','¬p ∨ ¬q','p ∨ q','p → q'],1,'قانون دي مورغان: ¬(p ∧ q) تكافئ (¬p ∨ ¬q).'],
+['concepts','قيمة الصواب','العبارة «كل عدد زوجي يقبل القسمة على 2» هي:',['صائبة','خاطئة','سؤال وليست عبارة','لا يمكن الحكم'],0,'هذه عبارة خبرية صحيحة بحسب تعريف العدد الزوجي.'],
+['truth','جدول الصواب','إذا كانت p صائبة و q صائبة، فما قيمة p ∨ q؟',['خاطئة','صائبة','لا يمكن تحديدها','تساوي ¬p'],1,'الرابط «أو» صائب إذا كانت واحدة على الأقل صائبة.'],
+['conditional','النقيض المعاكس','ما النقيض المعاكس للعبارة p → q؟',['q → p','¬p → ¬q','¬q → ¬p','p ∧ q'],2,'النقيض المعاكس هو ¬q → ¬p، وهو مكافئ منطقيًا للأصل.'],
+['concepts','العبارات المفتوحة','أي مما يأتي عبارة مفتوحة؟',['العدد 3 أولي','x + 2 = 7','العدد 10 زوجي','2 + 2 = 4'],1,'صدق x + 2 = 7 يتوقف على قيمة المتغير x.'],
+['truth','الرابط «و»','إذا كانت p خاطئة و q خاطئة، فما قيمة p ∧ q؟',['صائبة','خاطئة','صائبة إذا تساوت القيمتان','لا يمكن تحديدها'],1,'الاقتران «و» يحتاج إلى صدق العبارتين معًا.'],
+['conditional','الفرض والنتيجة','في «إذا درست بجد فإنك تتحسن»، ما النتيجة؟',['إذا درست بجد','فإنك تتحسن','تدرس بجد وتتحسن','لا شيء مما سبق'],1,'في p → q، تكون p الفرض و q النتيجة.']
 ];
-let questions=[],idx=0,selected=-1,locked=false,score=0,mode="all",lastMode="all",total=Number(localStorage.getItem("logicTotal")||0);
-const $=id=>document.getElementById(id);
-$("totalPoints").textContent=total;
-function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function start(m="all"){mode=m;lastMode=m;let pool=m==="all"?bank:bank.filter(x=>x.mode===m);questions=shuffle(pool).slice(0,Math.min(5,pool.length));idx=0;score=0;show("game");render()}
-function show(id){["home","game","results"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
-function render(){selected=-1;locked=false;const q=questions[idx];$("topic").textContent=q.topic;$("counter").textContent=`${idx+1} / ${questions.length}`;$("progressBar").style.width=`${idx/questions.length*100}%`;$("questionText").textContent=q.q;$("answers").innerHTML="";q.a.forEach((a,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=["أ) ","ب) ","ج) ","د) "][i]+a;b.onclick=()=>{if(locked)return;selected=i;[...$("answers").children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("checkBtn").disabled=false};$("answers").appendChild(b)});$("feedback").className="feedback hidden";$("checkBtn").textContent="تحقّقي من الإجابة";$("checkBtn").disabled=true}
-$("checkBtn").onclick=()=>{if(!locked){if(selected<0)return;locked=true;const q=questions[idx],ok=selected===q.c;if(ok){score+=10;total+=10;localStorage.setItem("logicTotal",total);$("totalPoints").textContent=total} [...$("answers").children].forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct");else if(i===selected)b.classList.add("wrong")});$("feedback").className="feedback "+(ok?"good":"bad");$("feedback").textContent=(ok?"إجابة صحيحة! +10 نقاط. ":"ليست الإجابة الصحيحة. ")+q.e;$("checkBtn").textContent=idx===questions.length-1?"عرض النتيجة":"السؤال التالي ←";$("checkBtn").disabled=false}else{if(idx<questions.length-1){idx++;render()}else{finish()}}};
-function finish(){show("results");$("progressBar").style.width="100%";$("finalScore").textContent=`${score} / ${questions.length*10}`;$("resultEmoji").textContent=score>=40?"🏆":score>=20?"⭐":"💪";$("resultTitle").textContent=score>=40?"بطلة المنطق!":score>=20?"أحسنتِ، واصلي!":"كل محاولة تعلّم جديد";$("resultMessage").textContent=score>=40?"أداء رائع! راجعي التفسيرات لتثبيت القواعد.":"راجعي تفسيرات الإجابات ثم أعيدي التحدّي لتحققي نتيجة أعلى."}
-document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>start(b.dataset.mode));$("startAll").onclick=()=>start("all");$("quitBtn").onclick=()=>show("home");$("replayBtn").onclick=()=>start(lastMode);$("homeBtn").onclick=()=>show("home");
-let deferredPrompt=null;const installBtn=$("installBtn");
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});
-installBtn.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"}else{alert("لإضافة اللعبة للشاشة الرئيسية: افتحي القائمة في المتصفح ثم اختاري «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق». يلزم نشر اللعبة على HTTPS لتفعيل التثبيت.")}};
-if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
-</script>
-</body>
-</html>
+const names={mix:'تحدي المنطق الشامل',concepts:'اختبار المفاهيم',truth:'جداول الصواب',conditional:'العبارات الشرطية',timed:'تحدي السرعة'};let mode='mix',qs=[],idx=0,ok=0,bad=0,earned=0,answered=false,total=+(localStorage.getItem('mantiqTotal')||0);document.getElementById('total').textContent=total;
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function start(m){mode=m;let pool=(m==='mix'||m==='timed')?bank:bank.filter(q=>q[0]===m);qs=shuffle(pool).slice(0,10);idx=ok=bad=earned=0;answered=false;['hero','modes','chooseTitle','result'].forEach(id=>document.getElementById(id).classList.add('hidden'));document.getElementById('game').classList.remove('hidden');document.getElementById('modeName').textContent=names[m];render();document.getElementById('game').scrollIntoView({behavior:'smooth'})}
+function render(){answered=false;let q=qs[idx];document.getElementById('count').textContent=(idx+1)+' / '+qs.length;document.getElementById('topic').textContent='الموضوع: '+q[1];document.getElementById('question').textContent=q[2];document.getElementById('progress').style.width=(idx/qs.length*100)+'%';let area=document.getElementById('answers');area.innerHTML='';q[3].forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=['أ','ب','ج','د'][i]+') '+a;b.onclick=()=>choose(i,b);area.appendChild(b)});document.getElementById('feedback').className='';document.getElementById('feedback').textContent='';document.getElementById('next').classList.add('hidden')}
+function choose(n,btn){if(answered)return;answered=true;let q=qs[idx],all=[...document.querySelectorAll('.answer')],good=n===q[4];all.forEach((b,i)=>{b.disabled=true;if(i===q[4])b.classList.add('correct')});if(!good)btn.classList.add('wrong');if(good){ok++;earned+=mode==='timed'?12:10}else bad++;let f=document.getElementById('feedback');f.className='feedback '+(good?'good':'bad');f.textContent=(good?'✅ إجابة صحيحة! نقاط مكتسبة. ':'❌ ليست الإجابة الصحيحة. ')+q[5];let next=document.getElementById('next');next.textContent=idx===qs.length-1?'عرض النتيجة 🏆':'السؤال التالي ←';next.classList.remove('hidden')}
+function next(){if(!answered)return;idx++;if(idx===qs.length){finish();return}render()}
+function finish(){document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');let score=ok*10;total+=earned;localStorage.setItem('mantiqTotal',total);document.getElementById('total').textContent=total;document.getElementById('score').textContent=score;document.getElementById('correct').textContent=ok;document.getElementById('wrong').textContent=bad;document.getElementById('earned').textContent=earned;document.getElementById('trophy').textContent=score>=80?'🏆':score>=50?'🥇':'💪';document.getElementById('resultTitle').textContent=score>=80?'بطل المنطق!':score>=50?'أحسنت، واصل التقدم!':'لا تستسلم، حاول مجددًا!';document.getElementById('resultText').textContent='أنهيت '+names[mode]+'. '+(mode==='timed'?'كل إجابة صحيحة تمنحك نقاطًا إضافية.':'');document.getElementById('progress').style.width='100%';document.getElementById('result').scrollIntoView({behavior:'smooth'})}
+function home(){document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.add('hidden');['hero','modes','chooseTitle'].forEach(id=>document.getElementById(id).classList.remove('hidden'));scrollTo({top:0,behavior:'smooth'})}
+if('serviceWorker'in navigator&&location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
